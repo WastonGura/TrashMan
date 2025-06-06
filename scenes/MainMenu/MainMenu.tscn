@@ -1,0 +1,117 @@
+[gd_scene load_steps=16 format=3 uid="uid://b5fi5r0rgc17d"]
+
+[ext_resource type="Script" uid="uid://c6rf2lfy8tn1n" path="res://scrips/MainMenu/MainMenu.gd" id="1_mqas3"]
+[ext_resource type="AudioStream" uid="uid://bbduf0xo2tr6r" path="res://asset/audio/SoundEffect/确认音效.wav" id="2_0qq82"]
+[ext_resource type="AudioStream" uid="uid://bygor1qu8qmpt" path="res://asset/audio/SoundEffect/移动UI音效.wav" id="3_y5ja3"]
+[ext_resource type="AudioStream" uid="uid://d3qaglh6hs11a" path="res://asset/audio/Bgm/目黒将司 - Beneath the Mask (Instrumental Version).wav" id="4_hlhgs"]
+[ext_resource type="PackedScene" uid="uid://cd3xbirvsox40" path="res://scenes/Setting/SettingMenu.tscn" id="5_bung8"]
+[ext_resource type="PackedScene" uid="uid://b15n56h8prtt8" path="res://scenes/Game/Game.tscn" id="6_oj5b0"]
+[ext_resource type="PackedScene" uid="uid://d0ik4s0qsbljs" path="res://scenes/GameOver/QuitMenu.tscn" id="7_y5ja3"]
+[ext_resource type="Shortcut" uid="uid://cmavkcl7tbsm5" path="res://resource/shortcut/quit_button.tres" id="11_bfo1e"]
+[ext_resource type="Texture2D" uid="uid://cpxno4rquxd2s" path="res://asset/image/UI/MainMenu/BG.png" id="36_acjyx"]
+[ext_resource type="Texture2D" uid="uid://dahjpt0dho75a" path="res://asset/image/UI/MainMenu/GameName.png" id="37_wc3pk"]
+[ext_resource type="Texture2D" uid="uid://b1lgfi6vogmp2" path="res://asset/image/UI/MainMenu/双人对决_normal@2x.png" id="38_vx80n"]
+[ext_resource type="Texture2D" uid="uid://m23ngvu68gmd" path="res://asset/image/UI/MainMenu/双人对决@2x.png" id="39_i7icb"]
+[ext_resource type="Texture2D" uid="uid://c6x44lyehjw0x" path="res://asset/image/UI/MainMenu/系统设置_normal@2x.png" id="40_5ncdy"]
+[ext_resource type="Texture2D" uid="uid://de26u3a3y4v2a" path="res://asset/image/UI/MainMenu/系统设置@2x.png" id="41_3dtoj"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_oy0qi"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_mqas3")
+confirm_sound_voice = ExtResource("2_0qq82")
+move_sound_voice = ExtResource("3_y5ja3")
+bgm = ExtResource("4_hlhgs")
+SettingMenuScene = ExtResource("5_bung8")
+GameScene = ExtResource("6_oj5b0")
+QuitMenuScene = ExtResource("7_y5ja3")
+
+[node name="BackGroud" type="CanvasLayer" parent="."]
+
+[node name="BG" type="TextureRect" parent="BackGroud"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("36_acjyx")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="GameName" type="TextureRect" parent="BackGroud"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -450.0
+offset_top = 50.0
+offset_right = 450.0
+offset_bottom = 275.0
+grow_horizontal = 2
+texture = ExtResource("37_wc3pk")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Configs" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ButtonLayout" type="VBoxContainer" parent="Configs"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -380.0
+offset_right = 150.0
+offset_bottom = -190.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 50
+
+[node name="双人对决" type="TextureButton" parent="Configs/ButtonLayout"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+texture_normal = ExtResource("38_vx80n")
+texture_pressed = ExtResource("39_i7icb")
+texture_hover = ExtResource("39_i7icb")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="系统设置" type="TextureButton" parent="Configs/ButtonLayout"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+texture_normal = ExtResource("40_5ncdy")
+texture_pressed = ExtResource("41_3dtoj")
+texture_hover = ExtResource("41_3dtoj")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Quit" type="TextureButton" parent="Configs"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -60.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 1
+shortcut = ExtResource("11_bfo1e")
+shortcut_in_tooltip = false
+texture_normal = SubResource("CompressedTexture2D_oy0qi")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="PageContainer" type="CanvasLayer" parent="."]
+layer = 3
+
+[connection signal="mouse_entered" from="Configs/ButtonLayout/双人对决" to="." method="_on_双人对决_mouse_entered"]
+[connection signal="pressed" from="Configs/ButtonLayout/双人对决" to="." method="_on_双人对决_pressed"]
+[connection signal="mouse_entered" from="Configs/ButtonLayout/系统设置" to="." method="_on_系统设置_mouse_entered"]
+[connection signal="pressed" from="Configs/ButtonLayout/系统设置" to="." method="_on_系统设置_pressed"]
+[connection signal="pressed" from="Configs/Quit" to="." method="_on_quit_pressed"]
