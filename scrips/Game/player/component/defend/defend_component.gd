@@ -12,5 +12,6 @@ func set_DEF(new_DEF):
 func defend(damage):
 	pot_HP -= damage
 	var new_damage = damage - get_DEF()
+	print("current_DEF: ", get_DEF())
 	new_damage = max(new_damage, 1)
 	return new_damage

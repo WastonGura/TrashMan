@@ -44,5 +44,3 @@ func destroy():
 	var root = find_root(self)
 	if is_instance_valid(root):
 		root.queue_free()
-		print(root)
-		print("destroy")

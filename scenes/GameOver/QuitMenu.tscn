@@ -1,12 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0ik4s0qsbljs"]
+[gd_scene load_steps=9 format=3 uid="uid://d0ik4s0qsbljs"]
 
 [ext_resource type="Script" uid="uid://caehjt5tc8ucs" path="res://scrips/GameOver/QuitMenu.gd" id="1_34ov3"]
+[ext_resource type="AudioStream" uid="uid://bbduf0xo2tr6r" path="res://asset/audio/SoundEffect/确认音效.wav" id="2_l6c18"]
 [ext_resource type="StyleBox" uid="uid://1wvq0vrtg1vs" path="res://resource/Color/BlueCorner.tres" id="2_wuevx"]
 [ext_resource type="FontFile" uid="uid://0yxva75t0n2j" path="res://asset/fonts/FFF_AZADLIQ-Black.otf" id="3_4kjta"]
+[ext_resource type="AudioStream" uid="uid://bygor1qu8qmpt" path="res://asset/audio/SoundEffect/移动UI音效.wav" id="3_ase12"]
 [ext_resource type="StyleBox" uid="uid://bs7h0jwcju4fq" path="res://resource/Color/new_style_box_empty.tres" id="4_a58kb"]
 [ext_resource type="Shortcut" uid="uid://bphy23sibjl4d" path="res://resource/shortcut/comfirm.tres" id="5_sx6cj"]
 [ext_resource type="Shortcut" uid="uid://cf7bl581cyr2n" path="res://resource/shortcut/back.tres" id="6_l6c18"]
-
 
 [node name="QuitMenu" type="Control"]
 layout_mode = 3
@@ -17,6 +18,8 @@ anchor_bottom = 0.65
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_34ov3")
+confirm_sound = ExtResource("2_l6c18")
+move_sound = ExtResource("3_ase12")
 
 [node name="BG" type="Panel" parent="."]
 layout_mode = 1
@@ -89,5 +92,7 @@ theme_override_styles/normal = ExtResource("4_a58kb")
 shortcut = ExtResource("6_l6c18")
 text = "取消"
 
+[connection signal="mouse_entered" from="BG/Comfirm" to="." method="_on_comfirm_mouse_entered"]
 [connection signal="pressed" from="BG/Comfirm" to="." method="_on_comfirm_pressed"]
+[connection signal="mouse_entered" from="BG/Quit" to="." method="_on_quit_mouse_entered"]
 [connection signal="pressed" from="BG/Quit" to="." method="_on_quit_pressed"]

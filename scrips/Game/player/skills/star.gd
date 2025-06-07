@@ -1,10 +1,9 @@
 extends Area2D
 
-@onready var stars_audio_stream_player: AudioStreamPlayer = $StarsAudioStreamPlayer
-
 @export var animation_player: AnimationPlayer
 @export var flight_component: FlightComponent
 @export var flight_attack_component: FlightAttackComponent
+@export var stars_audio_stream:AudioStream
 
 func _ready() -> void:
 	flight_attack_component.connect("attack_over", Callable(flight_component, 'destroy'))
@@ -12,7 +11,7 @@ func _ready() -> void:
 
 func start() -> void:
 	animation_player.play("StarAnimation/Star")
-	stars_audio_stream_player.play()
+	AudioManager.play_sfx(stars_audio_stream)
 
 func _process(_delta: float) -> void:
 	pass

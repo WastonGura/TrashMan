@@ -7,30 +7,21 @@ extends Node2D
 
 
 func _process(_delta: float) -> void:
-	handle_input()
+	if player.velocity.y < 0 and not player.is_on_floor():
+		player.change_state("rise")
+	elif player.velocity.y > 0 and not player.is_on_floor():
+		player.change_state("fall")
+	elif player_control.is_flying and player.is_on_floor():
+		player.change_state("land")
 
-func handle_input():
+func _input(event):
 	if player_control.can_jump:
-		if Input.is_action_just_pressed(player.jump_action):
+		if event.is_action_pressed(player.jump_action):
 			player.change_state("jump")
-		else:
-			if player.velocity.y < 0 and not player.is_on_floor():
-				player.change_state("rise")
-			elif player.velocity.y > 0 and not player.is_on_floor():
-				player.change_state("fall")
-			elif player_control.is_flying and player.is_on_floor():
-				player.change_state("land")
-	else:
-		if player.velocity.y < 0 and not player.is_on_floor():
-			player.change_state("rise")
-		elif player.velocity.y > 0 and not player.is_on_floor():
-			player.change_state("fall")
-		elif player_control.is_flying and player.is_on_floor():
-			player.change_state("land")
 
 func _on_jump_state_entered() -> void:
 	player_control.jump = true
-	player_control.jump_locker = 1
+	player_control.jump_locker = 0.6
 	player.velocity.y = -player_control.jump_force
 
 func _on_jump_state_exited() -> void:
@@ -46,6 +37,7 @@ func _on_rise_state_exited() -> void:
 
 func _on_fall_state_entered() -> void:
 	player_control.is_flying = true
+	player.set_collision_mask_value(8,true)
 	player.animation_tree["parameters/BlendTree/BaseState/Fly/blend_position"] = 1
 
 func _on_fall_state_exited() -> void:

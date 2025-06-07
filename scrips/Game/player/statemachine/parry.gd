@@ -5,7 +5,6 @@ extends Node2D
 @export var area: Node2D
 @export var animation_player: AnimationPlayer
 @export var kawei_eye: Sprite2D
-@export var kawei_gameuse: AudioStreamPlayer
 
 @onready var parry_timer: Timer = $parry_timer
 @onready var kawei_timer: Timer = $kawei_timer
@@ -14,7 +13,7 @@ extends Node2D
 var has_kawei: bool
 
 func _process(_delta: float) -> void:
-	handle_input()
+	pass
 
 func kawei():
 	has_kawei = true
@@ -24,11 +23,11 @@ func kawei():
 	kawei_eye.show()
 	animation_player.play("kawei")
 	kawei_timer.start()
-	kawei_gameuse.play()
+	AudioManager.play_sfx(player.KaweiGameuse)
 
-func handle_input():
+func _input(event):
 	if player_control.can_parry:
-		if Input.is_action_just_pressed(player.parry_action):
+		if event.is_action_pressed(player.parry_action):
 			player.change_state("parry")
 
 func _on_parry_state_entered() -> void:

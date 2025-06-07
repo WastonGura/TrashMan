@@ -6,13 +6,13 @@ extends Node2D
 
 
 func _process(_delta: float) -> void:
-	handle_input()
+	pass
 
-func handle_input():
+func _input(event):
 	if player_control.can_control:
-		if Input.is_action_pressed(player.get_action):
+		if event.is_action_pressed(player.get_action):
 			player.change_state("get")
-		elif Input.is_action_just_released(player.get_action):
+		elif event.is_action_released(player.get_action):
 			player.change_state("idle")
 
 func _on_get_state_entered() -> void:

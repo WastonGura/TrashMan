@@ -3,12 +3,12 @@ class_name PlayerControl extends Node2D
 @export var player: Player
 
 const FlashATK:int = 100
-const AngleATK:int = 60
-const StarsATK:int = 40
+const AngleATK:int = 80
+const StarsATK:int = 60
 const RemoteATK:int = 30
-const NormalATK:int = 20
+const NormalATK:int = 15
 const ShieldDEF:int = 50
-const PotDEF:int = 10
+const PotDEF:int = 15
 const NormalDEF:int = 0
 
 const HURTFORCE := 100.0
@@ -16,9 +16,9 @@ const RUNSPEED := 600.0
 const FLYRUNSPEED := 400.0
 const DEFENDRUNSPEED := 50.0
 const JUMPFORCE := 900.0
-const GRAVITY := 2000.0
-const FLYPFORCE := 1200.0
-const FLYGRAVITY := 900.0
+const GRAVITY := 1500.0
+const FLYPFORCE := 900.0
+const FLYGRAVITY := 600.0
 const SKILLGRAVITY := 0.0
 const FLY_GRAVITY_DURATION := 2.0
 const ATTACK_LOCK_DURATION := 1
@@ -37,7 +37,7 @@ var can_close_attack: bool
 var can_defend: bool
 var can_remote_attack: bool
 var can_jump: bool
-var has_pet: bool = true
+var has_pot: bool = true
 var has_touch: bool = false
 
 var close_attack_locker: float = 0.0

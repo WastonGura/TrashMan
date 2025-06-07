@@ -12,6 +12,71 @@ var loser: Player
 var player_P1: Player
 var player_P2: Player
 
+
+func animate_ui_elastic_fade_in(
+	node_to_animate: Control, # 传入你需要动画的UI节点，比如Panel, Button等
+	start_scale: Vector2 = Vector2(0.5, 0.5), # 动画开始时的缩放大小
+	end_scale: Vector2 = Vector2(1.0, 1.0),   # 动画结束时的缩放大小
+	duration: float = 0.4, # 动画持续时间
+	fade_delay: float = 0.1, # 透明度动画的延迟
+	start_alpha: float = 0.0, # 动画开始时的透明度
+	end_alpha: float = 1.0    # 动画结束时的透明度
+) -> Tween:
+	"""
+	创建一个Tween动画，实现UI节点的弹性变出和透明度渐变。
+	
+	参数:
+		node_to_animate: 要进行动画的Control节点。
+		start_scale: 动画开始时节点的缩放。
+		end_scale: 动画结束时节点的缩放。
+		duration: 弹性动画的持续时间。
+		fade_delay: 透明度动画相对于缩放动画的延迟。
+		start_alpha: 动画开始时节点的透明度。
+		end_alpha: 动画结束时节点的透明度。
+		
+	返回:
+		创建的Tween对象，你可以用它来连接信号或者检查动画状态。
+	"""
+	
+	# 确保节点存在且是Control类型，因为我们需要操作它的scale和modulate
+	if not node_to_animate or not node_to_animate is Control:
+		push_error("animate_ui_elastic_fade_in: 传入的节点无效或不是Control类型！")
+		return null
+
+	# 如果节点是隐藏的，先让它可见
+	node_to_animate.visible = true
+
+	# 创建一个新的Tween
+	var tween = create_tween()
+
+	# 设置动画模式为并行，这样缩放和透明度可以同时进行
+	tween.set_parallel(true)
+
+	# 1. 缩放动画 (弹性变出效果)
+	# 设置初始缩放
+	node_to_animate.scale = start_scale
+	# 动画到最终缩放，使用TRANS_ELASTIC插值和EASE_OUT缓动，制造弹性效果
+	tween.tween_property(node_to_animate, "scale", end_scale, duration)\
+		.set_trans(Tween.TRANS_ELASTIC)\
+		.set_ease(Tween.EASE_OUT)
+
+	# 2. 透明度动画
+	# 设置初始透明度（通过modulate属性的alpha通道）
+	var start_color = node_to_animate.modulate
+	start_color.a = start_alpha
+	node_to_animate.modulate = start_color
+	
+	var end_color = node_to_animate.modulate
+	end_color.a = end_alpha
+	
+	# 动画到最终透明度，使用TRANS_SINE插值和EASE_IN_OUT缓动，并设置延迟
+	tween.tween_property(node_to_animate, "modulate:a", end_alpha, duration - fade_delay)\
+		.set_trans(Tween.TRANS_SINE)\
+		.set_ease(Tween.EASE_IN_OUT)\
+		.set_delay(fade_delay) # 延迟一点点，让缩放先开始
+	
+	return tween
+
 func set_result(player_id, player1, player2):
 	loser = player_id
 	player_P1 = player1
@@ -20,11 +85,9 @@ func set_result(player_id, player1, player2):
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	set_title()
-	_burn_animation()
+	var bg: Panel = $BG
+	animate_ui_elastic_fade_in(bg)
 
-func _burn_animation() -> void:
-	var tween:Tween = create_tween()
-	
 
 func set_title():
 	if loser == player_P1:
@@ -34,46 +97,19 @@ func set_title():
 
 func _on_comfirm_pressed() -> void:
 	AudioManager.play_sfx(confirm_sound)
-	#var mainmenu_scene:PackedScene = ResourceLoader.load(MainMenuPath)
-	#var mainmenu_page = mainmenu_scene.instantiate()
+	get_tree().change_scene_to_file(MainMenuPath)
+	CountInstance.created = false
+	queue_free()
 
 func _on_quit_pressed() -> void:
 	AudioManager.play_sfx(confirm_sound)
 	get_tree().reload_current_scene()
+	CountInstance.created = false
+	queue_free()
 
-func _on_comfirm_focus_entered() -> void:
+
+func _on_comfirm_mouse_entered() -> void:
 	AudioManager.play_sfx(move_sound)
 
-func _on_quit_focus_entered() -> void:
+func _on_quit_mouse_entered() -> void:
 	AudioManager.play_sfx(move_sound)
-
-	#var status = ResourceLoader.load_threaded_get_status(target_scene_path)
-#
-	#match status:
-		#ResourceLoader.THREAD_LOAD_IN_PROGRESS:
-			#var progress_array = []
-			#ResourceLoader.load_threaded_get_progress(target_scene_path, progress_array)
-			#if not progress_array.is_empty():
-				#load_progress = progress_array[0]
-				#progress_bar.value = load_progress * 100 # 进度条通常是0-100
-				#loading_label.text = "加载中... %d%%" % int(progress_bar.value)
-			#else:
-				## 有时候 progress_array 可能为空，或者进度更新不那么频繁
-				## 可以显示一个旋转的图标或者简单的“加载中...”
-				#loading_label.text = "加载中..."
-#
-		#ResourceLoader.THREAD_LOAD_LOADED:
-			## 资源已加载完成，获取资源实例并切换场景
-			#var loaded_scene_packed = ResourceLoader.load_threaded_get(target_scene_path)
-			#if loaded_scene_packed:
-				#get_tree().change_scene_to_packed(loaded_scene_packed)
-			#else:
-				#print("无法获取加载的场景！")
-				#loading_label.text = "加载失败！"
-#
-			#set_process(false) # 停止 _process 函数，因为加载已完成
-#
-		#ResourceLoader.THREAD_LOAD_FAILED:
-			#print("异步加载失败！")
-			#loading_label.text = "加载失败！"
-			#set_process(false)

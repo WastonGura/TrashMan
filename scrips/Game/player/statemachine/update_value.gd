@@ -5,7 +5,7 @@ extends Node2D
 @export var player: Player
 @export var player_control: PlayerControl
 
-var last_has_pet:bool = true
+var last_has_pot:bool = true
 
 func _process(delta: float) -> void:
 	update_value(delta)
@@ -31,25 +31,25 @@ func update_locker(delta):
 		if player.is_on_floor():
 			player_control.jump_locker = 0
 		else:
-			player_control.jump_locker -= delta
+			player_control.jump_locker -= delta * 2
 			player_control.jump_locker = max(0,player_control.jump_locker)
 
 func pet_atk():
-	if player_control.has_pet and not last_has_pet:
+	if player_control.has_pot and not last_has_pot:
 		var current_atk = player.attack_component.get_ATK()
 		var new_atk = current_atk + 5
 		player.attack_component.set_ATK(new_atk)
-		last_has_pet = true
-	if not player_control.has_pet and last_has_pet:
+		last_has_pot = true
+	if not player_control.has_pot and last_has_pot:
 		var current_atk = player.attack_component.get_ATK()
 		var new_atk = current_atk - 5
 		player.attack_component.set_ATK(new_atk)
-		last_has_pet = false
+		last_has_pot = false
 
 func shield_def():
 	if player_control.continue_defend:
 		player.defend_component.DEF += 40
-	if not player_control.has_pet:
+	if not player_control.has_pot:
 		player.defend_component.DEF -= 20
 
 func run_speed():

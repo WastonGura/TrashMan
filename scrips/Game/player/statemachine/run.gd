@@ -20,13 +20,13 @@ func run():
 func _physics_process(_delta: float) -> void:
 	if not player_control.continue_defend:
 		set_player_direction()
-	handle_input()
+	_update_state()
 	if player_control.can_run:
 		run()
 	else:
 		player.velocity.x = 0.0
 
-func handle_input():
+func _update_state() -> void:
 	if player_control.can_run and abs(player.direction.x) > 0:
 		player.change_state("run")
 	elif player_control.is_running and abs(player.direction.x) == 0:
