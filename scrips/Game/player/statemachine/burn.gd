@@ -18,11 +18,9 @@ func _on_burn_state_entered() -> void:
 	burn_duration.start()
 	player_control.is_burning = true
 	player.animation_tree.set("parameters/BlendTree/BurnAdd/add_amount", 1.0)
-	print("reburn")
 	area_control.close_hitbox()
 
 func _on_burn_state_exited() -> void:
-	print("has burn")
 	player_control.burn = true
 	player_control.is_burning = false
 	player.animation_tree.set("parameters/BlendTree/BurnAdd/add_amount", 0.0)

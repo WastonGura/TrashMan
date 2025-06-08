@@ -17,7 +17,6 @@ func attack(area):
 		var attacker = find_root(area)
 		if attacker != find_root(self):
 			var damage = get_ATK()
-			print(area.scale.x)
 			attacker.find_child("init").set_attack_maker_direction(find_root(self).scale.x)
 			var health_component = attacker.get_node("component/HealthComponent")
 			health_component.take_damage(damage, is_shield_box)

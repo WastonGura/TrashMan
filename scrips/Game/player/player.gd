@@ -11,6 +11,13 @@ class_name Player extends CharacterBody2D
 @export var get_component: GetComponent
 @export var hip: Bone2D
 
+@export var KaweiGameuse:AudioStream
+@export var Persona:AudioStream
+@export var HurtAudioStreamPlayer:AudioStream
+@export var DieAudioStreamPlayer:AudioStream
+@export var SoundEffect:AudioStream
+
+
 @onready var animation_tree: AnimationTree = $AnimationTree
 @export var skill: Node2D
 @export var shield: Node2D
@@ -41,7 +48,6 @@ func _ready() -> void:
 	init_setting()
 	init.burn()
 	root_node = get_parent()
-	print("Current Hp: ", healeth_component.get_HP())
 	healeth_component.connect("damage_over", Callable(self, "award"))
 
 func _physics_process(_delta: float) -> void:
@@ -65,6 +71,8 @@ func init_setting() -> void:
 	jump_action = get_input_action("Jump", input_prefix)
 	left_run_action = get_input_action("LeftRun", input_prefix)
 	right_run_action = get_input_action("RightRun", input_prefix)
+	attack_component.set_ATK(player_control.NormalATK)
+	defend_component.set_DEF(player_control.NormalDEF)
 	emit_signal("id_ready")
 
 func award(damage, is_shield):
@@ -75,7 +83,7 @@ func award(damage, is_shield):
 		ep_component.set_EP(new_ep)
 
 func init_value():
-	player_control.has_pet = true
+	player_control.has_pot = true
 	player_control.is_action = false
 
 func set_color(player_type) -> void:

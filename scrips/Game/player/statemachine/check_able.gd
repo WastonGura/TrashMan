@@ -89,7 +89,7 @@ func check_close_attack():
 
 func check_remote_attack():
 	if player_control.can_control and not player_control.is_action:
-		if player_control.has_pet:
+		if player_control.has_pot:
 			return true
 		else:
 			return false

@@ -5,9 +5,13 @@ extends Node2D
 @export var flight_container: Node2D
 @export var canvas_layer: CanvasLayer
 @export var game_over_scene: PackedScene
+@export var QuitMenuScene:PackedScene
+@export var SettingMenuScene:PackedScene
 
 @export var bg_music1:AudioStream
 @export var bg_music2:AudioStream
+
+@onready var container: Control = $GUI/Container
 
 var HP_P1
 var EP_P1
@@ -45,3 +49,17 @@ func game_over(player_id):
 	canvas_layer.add_child(game_over_instance)
 	AudioManager.play_music(bg_music2)
 	#get_tree().paused = true
+
+func _on_quit_pressed() -> void:
+	if not CountInstance.created:
+		ShowCloseGameMenu()
+		CountInstance.created = true
+
+## 弹出退出游戏确认窗口
+func ShowCloseGameMenu():
+	var quit_menu = QuitMenuScene.instantiate()
+	container.add_child(quit_menu)
+
+func _on_setting_pressed() -> void:
+	var setting_page = SettingMenuScene.instantiate()
+	container.add_child(setting_page)

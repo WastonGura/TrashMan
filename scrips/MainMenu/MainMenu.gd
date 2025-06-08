@@ -21,6 +21,9 @@ func _ready() -> void:
 	back_groud_layer.show()
 	configs_layer.show()
 	page_container.hide()
+	AudioManager.set_volume(0, CountInstance.voice_db)
+	AudioManager.set_volume(1,CountInstance.bgm_db)
+	AudioManager.set_volume(2,CountInstance.sfx_db)
 
 # 功能区
 ## 弹出退出游戏确认窗口
@@ -31,7 +34,9 @@ func ShowCloseGameMenu():
 # 信号接收区
 ## 退出游戏按钮
 func _on_quit_pressed() -> void:
-	ShowCloseGameMenu()
+	if not CountInstance.created:
+		ShowCloseGameMenu()
+		CountInstance.created = true
 
 func _on_双人对决_mouse_entered() -> void:
 	AudioManager.play_sfx(move_sound_voice)

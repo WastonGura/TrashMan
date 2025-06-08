@@ -7,7 +7,6 @@ extends Node2D
 
 @export var player: Player
 @export var player_control: PlayerControl
-@export var persona: AudioStreamPlayer
 
 # 星星预制件 (PackedScene)
 @export var star_scene : PackedScene
@@ -46,8 +45,6 @@ func _set_action():
 		"skill1": player.get_action,
 		"skill2": player.defend_action,
 	}
-	print(player.skill_action)
-
 
 func _haddle_skill(skill_name):
 	match skill_name:
@@ -59,7 +56,7 @@ func _haddle_skill(skill_name):
 			player.state_chart.send_event("flash")
 
 func fire():
-	persona.play()
+	AudioManager.play_sfx(player.Persona)
 	var angle_instance = angle_scene.instantiate()
 	angle_instance.scale.x = hip.scale.x
 	angle_instance.global_position = player.global_position + Vector2(50, -50) * hip.scale.normalized()
@@ -70,7 +67,7 @@ func fire():
 	emit_signal("skill_created",angle_instance)
 
 func flash():
-	persona.play()
+	AudioManager.play_sfx(player.Persona)
 	var flash_instance = flash_scene.instantiate()
 	flash_instance.scale.x = hip.scale.x
 	flash_instance.global_position = player.global_position + Vector2(120, -120) * hip.scale.normalized()
@@ -79,7 +76,7 @@ func flash():
 	emit_signal("skill_created",flash_instance)
 
 func spark():
-	persona.play()
+	AudioManager.play_sfx(player.Persona)
 	var angle_step = 360.0 / num_stars
 	for i in range(num_stars):
 		var star = star_scene.instantiate()
@@ -89,40 +86,31 @@ func spark():
 		star.global_position = player.global_position + spawn_pos
 		# 配置飞行组件
 		star.flight_component.set_direction_degrees(current_angle)
+		star.flight_attack_component.set_ATK(player_control.StarsATK)
 		star.flight_attack_component.player_id = player
 		# 添加到场景
 		emit_signal("skill_created", star)
 
-#func _input(InputEvent):
-	#if player_control.can_skill:
-		#if Input.is_action_pressed(player.skill_action):
-			#print("skill")
-			#if Input.is_action_pressed(player.get_action):
-				#player.state_chart.send_event("stars")
-			#elif Input.is_action_pressed(player.defend_action):
-				#player.state_chart.send_event("flash")
-			#else:
-				#player.state_chart.send_event("angle")
-
 func _input(event):
-	if event.is_action_pressed(MAIN_ACTION):
-		# 主动作按下
-		is_main_action_pressed = true
-		current_combo_action = ""  # 重置组合动作
-	elif event.is_action_released(MAIN_ACTION):
-		# 主动作释放，触发技能
-		trigger_skill()
-	
-	# 检查组合动作
-	if is_main_action_pressed:
-		for action_name in COMBO_ACTIONS.values():
-			if event.is_action_pressed(action_name):
-				# 如果已经有组合动作，则忽略新的按键
-				if current_combo_action == "":
-					current_combo_action = action_name
-			elif event.is_action_released(action_name):
-				if current_combo_action == action_name:
-					current_combo_action = ""
+	if player_control.can_skill:
+		if event.is_action_pressed(MAIN_ACTION):
+			# 主动作按下
+			is_main_action_pressed = true
+			current_combo_action = ""  # 重置组合动作
+		elif event.is_action_released(MAIN_ACTION):
+			# 主动作释放，触发技能
+			trigger_skill()
+		
+		# 检查组合动作
+		if is_main_action_pressed:
+			for action_name in COMBO_ACTIONS.values():
+				if event.is_action_pressed(action_name):
+					# 如果已经有组合动作，则忽略新的按键
+					if current_combo_action == "":
+						current_combo_action = action_name
+				elif event.is_action_released(action_name):
+					if current_combo_action == action_name:
+						current_combo_action = ""
 
 func trigger_skill():
 	# 根据按下的组合动作决定技能

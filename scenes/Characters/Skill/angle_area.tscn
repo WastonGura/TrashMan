@@ -16,6 +16,7 @@ script = ExtResource("1_asung")
 flight_attack_component = NodePath("FlightAttackComponent")
 flight_component = NodePath("FlightComponent")
 animation_player = NodePath("AnimationPlayer")
+angle_audio_stream = ExtResource("7_vu077")
 
 [node name="Angle" type="Sprite2D" parent="."]
 scale = Vector2(0.16, 0.16)
@@ -40,8 +41,5 @@ metadata/_custom_type_script = "uid://d2t5myp5pulfg"
 script = ExtResource("7_qu3jo")
 ATK = 50
 metadata/_custom_type_script = "uid://d2i123i0ly6kg"
-
-[node name="AngleAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_vu077")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

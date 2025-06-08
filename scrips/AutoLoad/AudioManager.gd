@@ -27,7 +27,6 @@ var sfx_audio_player_count: int = 6
 var sfx_players: Array[AudioStreamPlayer]
 
 func _ready() -> void:
-	print("[声音管理器]: 加载完成")
 	init_music_audio_manager()
 	init_sfx_audio_manager()
 

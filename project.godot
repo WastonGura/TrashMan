@@ -11,12 +11,15 @@ config_version=5
 [application]
 
 config/name="Fight and Trashcan"
+config/tags=PackedStringArray("pvp")
 run/main_scene="uid://b5fi5r0rgc17d"
 config/features=PackedStringArray("4.4", "Mobile")
+config/windows_native_icon="res://asset/image/256.ico"
 
 [autoload]
 
 AudioManager="*res://scrips/AutoLoad/AudioManager.gd"
+CountInstance="*res://scrips/AutoLoad/CountInstance.gd"
 
 [display]
 

@@ -10,7 +10,7 @@ func set_EP(new_EP):
 
 func update_ep_by_trash():
 	var currernt_ep = get_EP()
-	var new_ep = currernt_ep + 20
+	var new_ep = currernt_ep + 40
 	set_EP(new_ep)
 
 func consume_EP(amount):

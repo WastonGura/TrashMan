@@ -15,6 +15,7 @@ script = ExtResource("1_v3jqq")
 animation_player = NodePath("AnimationPlayer")
 flight_component = NodePath("FlightComponent")
 flight_attack_component = NodePath("FlightAttackComponent")
+stars_audio_stream = ExtResource("7_kv11n")
 
 [node name="Stars" type="Sprite2D" parent="."]
 scale = Vector2(0.05, 0.05)
@@ -39,8 +40,5 @@ metadata/_custom_type_script = "uid://d2t5myp5pulfg"
 script = ExtResource("6_v3jqq")
 ATK = 30
 metadata/_custom_type_script = "uid://d2i123i0ly6kg"
-
-[node name="StarsAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_kv11n")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

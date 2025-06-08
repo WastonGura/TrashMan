@@ -8,14 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://b15n56h8prtt8" path="res://scenes/Game/Game.tscn" id="6_oj5b0"]
 [ext_resource type="PackedScene" uid="uid://d0ik4s0qsbljs" path="res://scenes/GameOver/QuitMenu.tscn" id="7_y5ja3"]
 [ext_resource type="Shortcut" uid="uid://cmavkcl7tbsm5" path="res://resource/shortcut/quit_button.tres" id="11_bfo1e"]
+[ext_resource type="Texture2D" uid="uid://1jlvxufh6twg" path="res://asset/image/UI/MainMenu/Quit@2x.png" id="15_oj5b0"]
 [ext_resource type="Texture2D" uid="uid://cpxno4rquxd2s" path="res://asset/image/UI/MainMenu/BG.png" id="36_acjyx"]
 [ext_resource type="Texture2D" uid="uid://dahjpt0dho75a" path="res://asset/image/UI/MainMenu/GameName.png" id="37_wc3pk"]
 [ext_resource type="Texture2D" uid="uid://b1lgfi6vogmp2" path="res://asset/image/UI/MainMenu/双人对决_normal@2x.png" id="38_vx80n"]
 [ext_resource type="Texture2D" uid="uid://m23ngvu68gmd" path="res://asset/image/UI/MainMenu/双人对决@2x.png" id="39_i7icb"]
 [ext_resource type="Texture2D" uid="uid://c6x44lyehjw0x" path="res://asset/image/UI/MainMenu/系统设置_normal@2x.png" id="40_5ncdy"]
 [ext_resource type="Texture2D" uid="uid://de26u3a3y4v2a" path="res://asset/image/UI/MainMenu/系统设置@2x.png" id="41_3dtoj"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_oy0qi"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -103,7 +102,7 @@ grow_vertical = 0
 mouse_filter = 1
 shortcut = ExtResource("11_bfo1e")
 shortcut_in_tooltip = false
-texture_normal = SubResource("CompressedTexture2D_oy0qi")
+texture_normal = ExtResource("15_oj5b0")
 ignore_texture_size = true
 stretch_mode = 5
 

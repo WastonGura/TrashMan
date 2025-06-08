@@ -3,7 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://4qojwgm6o1di" path="res://asset/image/UI/SettingMenu/预告信背景.png" id="1_r2ghf"]
 [ext_resource type="Script" uid="uid://c7eg4x8g7bvm8" path="res://scrips/SettingMenu/SettingMenu.gd" id="1_xf3w0"]
 [ext_resource type="Shortcut" uid="uid://cmavkcl7tbsm5" path="res://resource/shortcut/quit_button.tres" id="2_g6dxv"]
+[ext_resource type="Texture2D" uid="uid://1jlvxufh6twg" path="res://asset/image/UI/MainMenu/Quit@2x.png" id="4_bhxxo"]
 [ext_resource type="Shortcut" uid="uid://cf7bl581cyr2n" path="res://resource/shortcut/back.tres" id="5_bhxxo"]
+[ext_resource type="Texture2D" uid="uid://bmv7y6j6gronl" path="res://asset/image/UI/MainMenu/Home@2x.png" id="6_kobes"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ewow"]
 bg_color = Color(0.965, 0.965, 0.965, 0.243)
@@ -43,7 +45,9 @@ font_name = "FFF_AZADLIQ Black"
 style_name = "Black"
 font_style = 1
 font_weight = 900
+subpixel_positioning = 0
 msdf_pixel_range = 8
+msdf_size = 128
 cache/0/16/0/ascent = 16.0
 cache/0/16/0/descent = 4.0
 cache/0/16/0/underline_position = 1.59375
@@ -369,14 +373,16 @@ cache/0/80/0/glyphs/25/size = Vector2(36, 60)
 cache/0/80/0/glyphs/25/uv_rect = Rect2(151, 122, 36, 60)
 cache/0/80/0/glyphs/25/texture_idx = 0
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_oy0qi"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xf3w0"]
-
-[node name="SettingMenu" type="Control"]
+[node name="SettingMenu" type="Control" node_paths=PackedStringArray("bgm_progress_bar", "sfx_progress_bar", "voice_progress_bar", "bgm_slider", "sfx_slider", "voice_slider")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_xf3w0")
+bgm_progress_bar = NodePath("Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer/UIContainer/HBoxContainer/BGMProgressBar")
+sfx_progress_bar = NodePath("Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer2/UIContainer/HBoxContainer/SFXProgressBar")
+voice_progress_bar = NodePath("Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer3/UIContainer/HBoxContainer/VoiceProgressBar")
+bgm_slider = NodePath("Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer/UIContainer/BGMSlider")
+sfx_slider = NodePath("Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer2/UIContainer/SFXSlider")
+voice_slider = NodePath("Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer3/UIContainer/VoiceSlider")
 
 [node name="BackGround" type="CanvasLayer" parent="."]
 layer = 3
@@ -419,6 +425,7 @@ theme_override_constants/separation = 120
 layout_mode = 2
 theme_override_constants/margin_left = 200
 theme_override_constants/margin_top = 45
+theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 45
 
 [node name="UIContainer" type="VBoxContainer" parent="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer"]
@@ -430,14 +437,15 @@ layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer/UIContainer/HBoxContainer"]
+[node name="BGMProgressBar" type="ProgressBar" parent="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer/UIContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/background = SubResource("StyleBoxFlat_1ewow")
 theme_override_styles/fill = SubResource("StyleBoxFlat_bhxxo")
-step = 1.0
-value = 50.0
+max_value = 1.0
+step = 0.05
+value = 0.4
 fill_mode = 3
 
 [node name="Label" type="Label" parent="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer/UIContainer"]
@@ -449,10 +457,17 @@ text = "背景音乐"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="BGMSlider" type="HSlider" parent="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer/UIContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 0.3
+
 [node name="BaseContainer2" type="MarginContainer" parent="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 200
+theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 45
+theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 45
 
 [node name="UIContainer" type="VBoxContainer" parent="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer2"]
@@ -463,14 +478,15 @@ layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer2/UIContainer/HBoxContainer"]
+[node name="SFXProgressBar" type="ProgressBar" parent="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer2/UIContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/background = SubResource("StyleBoxFlat_1ewow")
 theme_override_styles/fill = SubResource("StyleBoxFlat_bhxxo")
-step = 1.0
-value = 50.0
+max_value = 1.0
+step = 0.05
+value = 1.0
 fill_mode = 3
 
 [node name="Label" type="Label" parent="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer2/UIContainer"]
@@ -482,10 +498,17 @@ text = "音效"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SFXSlider" type="HSlider" parent="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer2/UIContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 0.3
+
 [node name="BaseContainer3" type="MarginContainer" parent="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 200
+theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 45
+theme_override_constants/margin_right = 200
 theme_override_constants/margin_bottom = 45
 
 [node name="UIContainer" type="VBoxContainer" parent="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer3"]
@@ -496,14 +519,14 @@ layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer3/UIContainer/HBoxContainer"]
+[node name="VoiceProgressBar" type="ProgressBar" parent="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer3/UIContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/background = SubResource("StyleBoxFlat_1ewow")
 theme_override_styles/fill = SubResource("StyleBoxFlat_bhxxo")
-step = 1.0
-value = 50.0
+max_value = 1.0
+step = 0.05
 fill_mode = 3
 
 [node name="Label" type="Label" parent="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer3/UIContainer"]
@@ -514,6 +537,12 @@ theme_override_font_sizes/font_size = 80
 text = "总音量"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="VoiceSlider" type="HSlider" parent="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer3/UIContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 0.3
 
 [node name="Label" type="Label" parent="Settings/ScrollContainer/AllUIContainer"]
 layout_mode = 2
@@ -542,7 +571,7 @@ theme_override_font_sizes/font_size = 60
 text = "感谢游玩本游戏，第一次制作游戏bug比较多，请见谅。
 游戏使用Godot4.4引擎制作。
 Godot下载地址：https://godotengine.org/download/archive/4.4.1-stable/
-本游戏Github地址：https://github.com/WastonGura/TrashManGoGoGo
+本游戏Github地址：https://github.com/WastonGura/TrashMan
 欢迎大佬们来修改游戏"
 
 [node name="Configs" type="CanvasLayer" parent="."]
@@ -561,7 +590,7 @@ grow_vertical = 0
 mouse_filter = 1
 shortcut = ExtResource("2_g6dxv")
 shortcut_in_tooltip = false
-texture_normal = SubResource("CompressedTexture2D_oy0qi")
+texture_normal = ExtResource("4_bhxxo")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -578,7 +607,7 @@ grow_vertical = 0
 mouse_filter = 1
 shortcut = ExtResource("5_bhxxo")
 shortcut_in_tooltip = false
-texture_normal = SubResource("CompressedTexture2D_xf3w0")
+texture_normal = ExtResource("6_kobes")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -591,5 +620,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[connection signal="value_changed" from="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer/UIContainer/BGMSlider" to="." method="_on_bgm_slider_value_changed"]
+[connection signal="value_changed" from="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer2/UIContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="value_changed" from="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer3/UIContainer/VoiceSlider" to="." method="_on_voice_slider_value_changed"]
 [connection signal="pressed" from="Configs/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Configs/Home" to="." method="_on_home_pressed"]

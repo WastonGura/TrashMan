@@ -1,4 +1,5 @@
-class_name FlightAttackComponent extends AttackComponent
+class_name FlightAttackComponent 
+extends AttackComponent
 
 var player_id: Player
 signal attack_over_for_pot

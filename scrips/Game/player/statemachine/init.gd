@@ -4,8 +4,6 @@ extends Node2D
 @export var player_control: PlayerControl
 @export var hurt_timer:Timer
 @export var die_timer: Timer
-@onready var hurt_audio_stream_player: AudioStreamPlayer = $HurtAudioStreamPlayer
-@onready var die_audio_stream_player: AudioStreamPlayer = $DieAudioStreamPlayer
 
 var attack_maker_direction
 var hurt_power: float
@@ -34,9 +32,9 @@ func burn():
 
 func reburn():
 	player_control.has_touch = false
-	player_control.has_pet = true
+	player_control.has_pot = true
 	player.defend_component.pot_HP = 100
-	player.ep_component.set_EP(20)
+	player.ep_component.set_EP(30)
 	player.healeth_component.set_HP(100)
 
 func set_create_position():
@@ -51,7 +49,7 @@ func hurt(damage, is_shield):
 
 func _on_hurt_state_entered() -> void:
 	hurt_timer.start()
-	hurt_audio_stream_player.play()
+	AudioManager.play_sfx(player.HurtAudioStreamPlayer)
 	player_control.is_hurting = true
 
 func _on_hurt_state_exited() -> void:
@@ -63,7 +61,7 @@ func _on_hurt_state_processing(delta: float) -> void:
 	player.velocity.x = hurt_power * attack_maker_direction
 
 func _on_die_state_entered() -> void:
-	die_audio_stream_player.play()
+	AudioManager.play_sfx(player.DieAudioStreamPlayer)
 	player.healeth_component.current_lives = player.healeth_component.current_lives - 1
 	if player.healeth_component.current_lives > 0:
 		die_timer.start()
