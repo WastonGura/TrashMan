@@ -7,3 +7,6 @@ extends Node
 @export var bgm_db:float = 0.3
 @export var sfx_db:float = 0.3
 @export var voice_db:float = 0.3
+
+
+@export var sorce:int = 0

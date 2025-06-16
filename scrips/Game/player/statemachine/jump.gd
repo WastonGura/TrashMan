@@ -21,7 +21,7 @@ func _input(event):
 
 func _on_jump_state_entered() -> void:
 	player_control.jump = true
-	player_control.jump_locker = 0.6
+	player_control.jump_locker = 0.0
 	player.velocity.y = -player_control.jump_force
 
 func _on_jump_state_exited() -> void:

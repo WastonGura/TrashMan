@@ -11,8 +11,8 @@ const ShieldDEF:int = 50
 const PotDEF:int = 15
 const NormalDEF:int = 0
 
-const HURTFORCE := 100.0
-const RUNSPEED := 600.0
+const HURTFORCE := 70.0
+var RUNSPEED := 600.0
 const FLYRUNSPEED := 400.0
 const DEFENDRUNSPEED := 50.0
 const JUMPFORCE := 900.0
@@ -50,7 +50,7 @@ var defend_cosume: int = 5
 var parry_cosume: int = 30
 var parry_get: int = 10
 
-var create_position = [Vector2(350,500), Vector2(900,540), Vector2(2300, 600), Vector2(1320, 1050)]
+var create_position = [Vector2(1600,500), Vector2(900,500)]
 
 var jump: bool
 var die: bool = false

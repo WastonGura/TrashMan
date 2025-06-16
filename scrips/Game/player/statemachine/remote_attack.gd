@@ -7,15 +7,10 @@ extends Node2D
 @export var player: Player
 @export var player_control: PlayerControl
 
-const PETPATH = preload("res://scenes/characters/Pot.tscn")
+const PETPATH = preload("res://scenes/Characters/Pot.tscn")
 
 signal pet_created(pet)
 
-func hide_pet():
-	if player_control.has_pot:
-		pet.visible = true
-	else:
-		pet.visible = false
 
 func create_pet():
 	var pet_instance = PETPATH.instantiate()
@@ -31,7 +26,6 @@ func _process(_delta: float) -> void:
 		pet.visible = true
 
 func _input(event):
-	if player_control.can_remote_attack:
 		if event.is_action_pressed(player.remote_attack_action):
 			player.change_state("remote_attack")
 
@@ -40,8 +34,6 @@ func _on_remote_attack_state_entered() -> void:
 	player_control.is_action = true
 	player.animation_tree.set("parameters/BlendTree/Action/blend_position", Vector2(1.0, 0.0))
 	player.animation_tree["parameters/BlendTree/ActionOneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
-	player_control.has_pot = false
-	hide_pet()
 	create_pet()
 
 func _on_remote_attack_state_exited() -> void:

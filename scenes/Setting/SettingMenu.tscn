@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=4 uid="uid://cd3xbirvsox40"]
+[gd_scene load_steps=16 format=4 uid="uid://cd3xbirvsox40"]
 
 [ext_resource type="Texture2D" uid="uid://4qojwgm6o1di" path="res://asset/image/UI/SettingMenu/预告信背景.png" id="1_r2ghf"]
 [ext_resource type="Script" uid="uid://c7eg4x8g7bvm8" path="res://scrips/SettingMenu/SettingMenu.gd" id="1_xf3w0"]
 [ext_resource type="Shortcut" uid="uid://cmavkcl7tbsm5" path="res://resource/shortcut/quit_button.tres" id="2_g6dxv"]
+[ext_resource type="Texture2D" uid="uid://b314goq2aa5nr" path="res://asset/image/UI/SettingMenu/Grabber.png" id="3_kobes"]
 [ext_resource type="Texture2D" uid="uid://1jlvxufh6twg" path="res://asset/image/UI/MainMenu/Quit@2x.png" id="4_bhxxo"]
 [ext_resource type="Shortcut" uid="uid://cf7bl581cyr2n" path="res://resource/shortcut/back.tres" id="5_bhxxo"]
 [ext_resource type="Texture2D" uid="uid://bmv7y6j6gronl" path="res://asset/image/UI/MainMenu/Home@2x.png" id="6_kobes"]
@@ -373,6 +374,27 @@ cache/0/80/0/glyphs/25/size = Vector2(36, 60)
 cache/0/80/0/glyphs/25/uv_rect = Rect2(151, 122, 36, 60)
 cache/0/80/0/glyphs/25/texture_idx = 0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m28jt"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3tijw"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yq4e1"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [node name="SettingMenu" type="Control" node_paths=PackedStringArray("bgm_progress_bar", "sfx_progress_bar", "voice_progress_bar", "bgm_slider", "sfx_slider", "voice_slider")]
 layout_mode = 3
 anchors_preset = 0
@@ -459,6 +481,10 @@ vertical_alignment = 1
 
 [node name="BGMSlider" type="HSlider" parent="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer/UIContainer"]
 layout_mode = 2
+theme_override_icons/grabber = ExtResource("3_kobes")
+theme_override_icons/grabber_highlight = ExtResource("3_kobes")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_m28jt")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_m28jt")
 max_value = 1.0
 step = 0.05
 value = 0.3
@@ -500,6 +526,10 @@ vertical_alignment = 1
 
 [node name="SFXSlider" type="HSlider" parent="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer2/UIContainer"]
 layout_mode = 2
+theme_override_icons/grabber = ExtResource("3_kobes")
+theme_override_icons/grabber_highlight = ExtResource("3_kobes")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_3tijw")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_3tijw")
 max_value = 1.0
 step = 0.05
 value = 0.3
@@ -540,6 +570,10 @@ vertical_alignment = 1
 
 [node name="VoiceSlider" type="HSlider" parent="Settings/ScrollContainer/AllUIContainer/MarginContainer/AllBaseContainer/BaseContainer3/UIContainer"]
 layout_mode = 2
+theme_override_icons/grabber = ExtResource("3_kobes")
+theme_override_icons/grabber_highlight = ExtResource("3_kobes")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_yq4e1")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_yq4e1")
 max_value = 1.0
 step = 0.05
 value = 0.3

@@ -28,9 +28,8 @@ func _on_defend_state_entered() -> void:
 	defend_area.monitorable = true
 	defend_area.monitoring = true
 	shield_area.set_shield_direction(hip.scale.x)
-	if player_control.has_pot:
-		shield_area.shield_state_entered()
-		player.defend_component.set_DEF(player_control.ShieldDEF)
+	shield_area.shield_state_entered()
+	player.defend_component.set_DEF(player_control.ShieldDEF)
 	defend_start_timer.start()
 	player_control.start_defend = true
 	player_control.continue_defend = true

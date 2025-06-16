@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://d06tx7rmmx0b4"]
+
+[ext_resource type="Script" uid="uid://d3xh078gmml2w" path="res://scrips/Trash/plastic_bottle_big.gd" id="1_7yc6t"]
+[ext_resource type="Texture2D" uid="uid://ckrnuvjpihyel" path="res://asset/image/Trash/apple.png" id="2_7yc6t"]
+[ext_resource type="Shape2D" uid="uid://5pp7s6ughgwe" path="res://resource/Shape/Trash/plastic_bottle_big_shape_2d.tres" id="3_aua4a"]
+
+[node name="apple" type="Area2D" groups=["Trash"]]
+script = ExtResource("1_7yc6t")
+trash_id = "food"
+trash_type = "harm"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_7yc6t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = ExtResource("3_aua4a")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

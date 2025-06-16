@@ -6,6 +6,8 @@
 
 [node name="plastic_bottle_big" type="Area2D" groups=["Trash"]]
 script = ExtResource("1_sqvxb")
+trash_id = "plastic"
+trash_type = "recycle"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

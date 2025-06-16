@@ -19,7 +19,7 @@ func set_heal():
 	player_control.is_healing = true
 
 func heal_player(delta):
-	var up_hp = 20 * delta
+	var up_hp = 50 * delta
 	player.healeth_component.health_player(up_hp)
 	player_control.is_healing = false
 

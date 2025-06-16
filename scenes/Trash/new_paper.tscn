@@ -6,6 +6,8 @@
 
 [node name="new_paper" type="Area2D" groups=["Trash"]]
 script = ExtResource("1_7op1s")
+trash_id = "paper"
+trash_type = "recycle"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

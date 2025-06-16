@@ -88,11 +88,13 @@ func _ready() -> void:
 	var bg: Panel = $BG
 	animate_ui_elastic_fade_in(bg)
 
+func peace_end() -> void:
+	title.text = "任务完成"
 
-func set_title():
+func set_title() -> void:
 	if loser == player_P1:
 		title.text = "恭喜红方获胜"
-	else:
+	elif loser == player_P2:
 		title.text = "恭喜蓝方获胜"
 
 func _on_comfirm_pressed() -> void:
@@ -106,7 +108,6 @@ func _on_quit_pressed() -> void:
 	get_tree().reload_current_scene()
 	CountInstance.created = false
 	queue_free()
-
 
 func _on_comfirm_mouse_entered() -> void:
 	AudioManager.play_sfx(move_sound)

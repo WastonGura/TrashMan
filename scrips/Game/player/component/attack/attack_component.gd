@@ -1,6 +1,9 @@
-class_name AttackComponent extends Node2D
+class_name AttackComponent
+extends Node2D
 
 @export var ATK = 10
+@export var max_ATK = 100
+@export var min_ATK = 0
 
 signal attack_over
 
@@ -8,6 +11,7 @@ func get_ATK():
 	return ATK
 
 func set_ATK(new_ATK):
+	new_ATK = clamp(new_ATK, min_ATK, max_ATK)
 	ATK = new_ATK
 
 func attack(area):
@@ -17,7 +21,7 @@ func attack(area):
 		var attacker = find_root(area)
 		if attacker != find_root(self):
 			var damage = get_ATK()
-			attacker.find_child("init").set_attack_maker_direction(find_root(self).scale.x)
+			attacker.find_child("init").set_attack_maker_direction(find_root(area).get_direction())
 			var health_component = attacker.get_node("component/HealthComponent")
 			health_component.take_damage(damage, is_shield_box)
 			emit_signal("attack_over")

@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5c2jhluwbl8f"]
+
+[ext_resource type="Script" uid="uid://cil3jnhtakrjy" path="res://scrips/Game/Buff/speed_buff.gd" id="1_61o1c"]
+[ext_resource type="FontFile" uid="uid://0yxva75t0n2j" path="res://asset/fonts/FFF_AZADLIQ-Black.otf" id="1_gvuq1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_61o1c"]
+bg_color = Color(0.948097, 0.555681, 0.191317, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="SpeedBUFF" type="Panel"]
+custom_minimum_size = Vector2(49, 49)
+offset_right = 49.0
+offset_bottom = 49.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_61o1c")
+script = ExtResource("1_61o1c")
+buff_type = "speed_buff"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_gvuq1")
+theme_override_font_sizes/font_size = 30
+text = "速"
+horizontal_alignment = 1
+vertical_alignment = 1

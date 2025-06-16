@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqifohp6sscct"]
+
+[ext_resource type="Script" uid="uid://biu7vvtak0jua" path="res://scrips/Game/Buff/energy_buff.gd" id="1_5def1"]
+[ext_resource type="FontFile" uid="uid://0yxva75t0n2j" path="res://asset/fonts/FFF_AZADLIQ-Black.otf" id="2_hmllb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5def1"]
+bg_color = Color(0.143122, 0.679488, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="EnergyBUFF" type="Panel"]
+custom_minimum_size = Vector2(49, 49)
+offset_right = 49.0
+offset_bottom = 49.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5def1")
+script = ExtResource("1_5def1")
+buff_type = "energy_buff"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_hmllb")
+theme_override_font_sizes/font_size = 30
+text = "能"
+horizontal_alignment = 1
+vertical_alignment = 1

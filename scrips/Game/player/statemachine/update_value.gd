@@ -12,7 +12,6 @@ func _process(delta: float) -> void:
 
 func update_value(delta):
 	update_locker(delta)
-	pet_atk()
 	shield_def()
 	gravity_fly()
 	run_speed()
@@ -33,19 +32,7 @@ func update_locker(delta):
 		else:
 			player_control.jump_locker -= delta * 2
 			player_control.jump_locker = max(0,player_control.jump_locker)
-
-func pet_atk():
-	if player_control.has_pot and not last_has_pot:
-		var current_atk = player.attack_component.get_ATK()
-		var new_atk = current_atk + 5
-		player.attack_component.set_ATK(new_atk)
-		last_has_pot = true
-	if not player_control.has_pot and last_has_pot:
-		var current_atk = player.attack_component.get_ATK()
-		var new_atk = current_atk - 5
-		player.attack_component.set_ATK(new_atk)
-		last_has_pot = false
-
+			
 func shield_def():
 	if player_control.continue_defend:
 		player.defend_component.DEF += 40
